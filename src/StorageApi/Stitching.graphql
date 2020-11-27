@@ -1,0 +1,9 @@
+﻿extend type Query {
+  storages(): [Storage] @delegate
+  storage(id: Int): Storage @delegate
+}
+
+
+extend type User {
+  storages: [Storage] @delegate(path:"storagesByUser(id: $fields:id)")
+}

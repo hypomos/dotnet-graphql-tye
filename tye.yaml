@@ -1,0 +1,58 @@
+# tye application configuration file
+# read all about it at https://github.com/dotnet/tye
+#
+# when you've given us a try, we'd love to know what you think:
+#    https://aka.ms/AA7q20u
+#
+name: dotnet.graphql
+ingress:
+  - name: api
+    bindings:
+      - port: 8080
+    rules:
+      - host: localhost
+        service: apigateway
+
+services:
+  - name: redis-schema
+    image: redis
+    bindings:
+      - port: 6379
+        connectionString: ${host}:${port}
+
+  - name: apigateway
+    project: src/ApiGateway/ApiGateway.csproj
+    replicas: 1
+    # liveness:
+    #   http:
+    #     path: /healthz
+
+  - name: StorageApi
+    project: src/StorageApi/StorageApi.csproj
+    bindings:
+      - connectionString: https://${host}:${port}/graphql
+        protocol: https
+    replicas: 1
+    # liveness:
+    #   http:
+    #     path: /healthz
+    
+  - name: MetadataApi
+    project: src/MetaDataApi/MetaDataApi.csproj
+    bindings:
+      - connectionString: https://${host}:${port}/graphql
+        protocol: https
+    replicas: 1
+    # liveness:
+    #   http:
+    #     path: /healthz
+
+  - name: UserApi
+    project: src/UserApi/UserApi.csproj
+    bindings:
+      - connectionString: https://${host}:${port}/graphql
+        protocol: https
+    replicas: 1
+    # liveness:
+    #   http:
+    #     path: /healthz

@@ -1,0 +1,53 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "debug",
+            "command": "tye",
+            "type": "process",
+            "args": [
+                "run",
+                "--debug",
+                "*"
+            ],
+            "isBackground": true,
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^\\[(?<time>\\d{2}:\\d{2}:\\d{2})\\s(ERR)\\](.*)$",
+                    "severity": 2,
+                    "message": 3
+                },
+                "background": {
+                    "activeOnStart": false,
+                    "beginsPattern": {
+                        "regexp": "."
+                    },
+                    "endsPattern": {
+                        "regexp": ".*Collecting docker logs.*"
+                    }
+                }
+            }
+        },
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": "build"
+        }
+    ]
+}

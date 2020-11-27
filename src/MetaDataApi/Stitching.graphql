@@ -1,0 +1,7 @@
+﻿extend type Query {
+  metaData(id: Int): MetaData @delegate
+}
+
+extend type Storage {
+  metaDatas: [MetaData] @delegate(path:"metaDatasByStorage(id: $fields:id)")
+}
