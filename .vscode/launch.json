@@ -10,22 +10,28 @@
             "processName": "ApiGateway.exe"
         },
         {
-            "name": "MetaData",
+            "name": "MetaDataApi",
             "type": "coreclr",
             "request": "attach",
-            "processName": "MetaData.exe"
+            "processName": "MetaDataApi.exe"
         },
         {
-            "name": "Storage",
+            "name": "StorageApi",
             "type": "coreclr",
             "request": "attach",
-            "processName": "Storage.exe"
+            "processName": "StorageApi.exe"
+        },
+        {
+            "name": "UserApi",
+            "type": "coreclr",
+            "request": "attach",
+            "processName": "UserApi.exe"
         }
     ],
     "compounds": [
       {
         "name": "All",
-        "configurations": ["ApiGateway", "MetaData", "Storage"],
+        "configurations": ["ApiGateway", "MetaDataApi", "StorageApi", "UserApi"],
         "preLaunchTask": "debug"
       }
     ]
